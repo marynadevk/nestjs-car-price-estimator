@@ -1,11 +1,5 @@
-import {
-  AfterInsert,
-  AfterRemove,
-  AfterUpdate,
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { ReportEntity } from 'src/reports/reports.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class UserEntity {
@@ -18,18 +12,9 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @AfterInsert()
-  logInsert() {
-    console.log('insert user with ID', this.id);
-  }
+  @Column({ default: false })
+  admin: boolean;
 
-  @AfterUpdate()
-  logUpdate() {
-    console.log('update user with ID', this.id);
-  }
-
-  @AfterRemove()
-  logRemove() {
-    console.log('remove user with ID', this.id);
-  }
+  @OneToMany(() => ReportEntity, (report) => report.user)
+  reports: ReportEntity[];
 }

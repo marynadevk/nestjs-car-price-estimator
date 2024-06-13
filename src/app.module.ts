@@ -43,7 +43,7 @@ export class AppModule {
     consumer
       .apply(
         cookieSession({
-          keys: [''],
+          keys: ['qwerty'],
         }),
       )
       .forRoutes('*');
